@@ -6,11 +6,19 @@
 # |___/\__,_| .__/ \___|_|    \_/ |_|___/\___/|_|  | || .__/|_|\_\__, | /_/   \__\__,_|___/_|\_\___/
 #           |_|                                     \_\_|        |___/_/                            
 # make-config
+- name: make-config | RedHat | {{ supervisor.loggingdir }} should be created
+  file:
+    path:   "{{ supervisor.loggingdir }}"
+    state:  "directory"
+    owner:  "root"
+    group:  "root"
+    mode:   "0755"
+
 - block:
   - name: make-config | RedHat | /etc/supervisord.conf should be deployed
     notify: Restart supervisord
     template:
-      src:  "etc/supervisord.conf"
+      src:  "etc/supervisord.conf.j2"
       dest: "/etc/supervisord.conf"
       mode: "0644"
   when: ansible_os_family == "RedHat"
