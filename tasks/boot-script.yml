@@ -20,12 +20,12 @@
 - name: boot-script | supervisord should be started
   when: supervisor.started == true
   service:
-    name:    "supervisord"
-    enabled: "yes"
+    name:  "supervisord"
+    state: "started"
 
 - name: boot-script | supervisord should be enabled
   when: supervisor.enabled == true
   service:
-    name:  "supervisord"
-    state: "started"
+    name:    "supervisord"
+    enabled: "yes"
 
