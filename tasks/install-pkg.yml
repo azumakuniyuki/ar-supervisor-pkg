@@ -24,7 +24,42 @@
   when: ansible_os_family == "RedHat"
 
 - name: install-pkg | RedHat | supervisor should be installed
-  pip:
+  register: easy_install_supervisor
+  ignore_errors: true
+  easy_install:
     name:  "supervisor"
     state: "present"
+
+## fatal: [127.0.0.1]: FAILED! => {
+##     "changed": false, "msg": "Traceback (most recent call last):
+##   File "/usr/bin/easy_install", line 11, in <module>
+##     sys.exit(main())
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 2309, in main
+##     **kw
+##   File "/usr/lib/python2.7/site-packages/setuptools/__init__.py", line 129, in setup
+##     return distutils.core.setup(**attrs)
+##   File "/usr/lib64/python2.7/distutils/core.py", line 151, in setup
+##     dist.run_commands()
+##   File "/usr/lib64/python2.7/distutils/dist.py", line 953, in run_commands
+##     self.run_command(cmd)
+##   File "/usr/lib64/python2.7/distutils/dist.py", line 972, in run_command
+##     cmd_obj.run()
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 411, in run
+##     self.easy_install(spec, not self.no_deps)
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 672, in easy_install
+##     return self.install_item(spec, dist.location, tmpdir, deps)
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 698, in install_item
+##     dists = self.install_eggs(spec, download, tmpdir)
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 846, in install_eggs
+##     return [self.install_wheel(dist_filename, tmpdir)]
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 1070, in install_wheel
+##     return self.egg_distribution(destination)
+##   File "/usr/lib/python2.7/site-packages/setuptools/command/easy_install.py", line 888, in egg_distribution
+##     metadata = EggMetadata(zipimport.zipimporter(egg_path))
+## zipimport.ZipImportError: not a Zip file
+## "}
+
+- name: install-pkg | RedHat | supervisor should be installed (WORD AROUND)
+  when: easy_install_supervisor is failed
+  shell: /usr/bin/easy_install supervisor
 
