@@ -18,13 +18,13 @@
   when: ansible_os_family == "RedHat"
 
 - name: boot-script | supervisord should be started
-  when: supervisord.started == true
+  when: supervisor.started == true
   service:
     name:    "supervisord"
     enabled: "yes"
 
 - name: boot-script | supervisord should be enabled
-  when: supervisord.enabled == true
+  when: supervisor.enabled == true
   service:
     name:  "supervisord"
     state: "started"
