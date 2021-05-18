@@ -1,0 +1,29 @@
+---
+#                                  _                 __      _       __     __  _       __             _ _       
+#  ___ _   _ _ __   ___ _ ____   _(_)___  ___  _ __ / /_ __ | | ____ \ \   / /_| | ___ / _| __ _ _   _| | |_ ___ 
+# / __| | | | '_ \ / _ \ '__\ \ / / / __|/ _ \| '__| || '_ \| |/ / _` | | / / _` |/ _ \ |_ / _` | | | | | __/ __|
+# \__ \ |_| | |_) |  __/ |   \ V /| \__ \ (_) | |  | || |_) |   < (_| | |/ / (_| |  __/  _| (_| | |_| | | |_\__ \
+# |___/\__,_| .__/ \___|_|    \_/ |_|___/\___/|_|  | || .__/|_|\_\__, | /_/ \__,_|\___|_|  \__,_|\__,_|_|\__|___/
+#           |_|                                     \_\_|        |___/_/                                         
+# defaults file for ar-supervisor-pkg
+supervisor:
+  enabled: true
+  started: true
+  configroot: "/etc"
+  loggingdir: "/var/log/supervisor"
+
+  serverroot: "/var/lib/mysql"
+# configroot: "/etc/my.cnf.d"
+  socketpath: "/var/run/mysqld"
+  pidfiledir: "/var/run/mysqld"
+  rootpasswd: null
+  memorysize: 512
+  user: 
+    username: "mysql"
+    uid:      27
+    gid:      27
+    home:     "/var/lib/mysql"
+    group:    "mysql"
+    shell:    "/sbin/nologin"
+    comment:  "'MariaDB Server'"
+
